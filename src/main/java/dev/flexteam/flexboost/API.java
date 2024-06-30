@@ -1,4 +1,5 @@
 package dev.flexteam.flexboost;
+import dev.flexteam.flexboost.modules.APILogin;
 import dev.flexteam.flexboost.modules.APIRegistration;
 import dev.flexteam.flexboost.objects.userCredentials;
 import org.jetbrains.annotations.NotNull;
@@ -16,17 +17,16 @@ import java.util.Map;
 public class API {
 
     @PostMapping("/registration")
-    public Map<String, Boolean> registerUser(@RequestBody @NotNull userCredentials userCredentials) throws SQLException {
+    public Map<String, String> registerUser(@RequestBody @NotNull userCredentials userCredentials) throws SQLException {
         String userEMAIL = userCredentials.getEmail();
         String userPassword = userCredentials.getPassword();
-        boolean isAddSucessed = new APIRegistration().addUserToDB(userEMAIL, userPassword);
-        Map<String, Boolean> JSONResult = new HashMap<String, Boolean>();
-        JSONResult.put("Result:", isAddSucessed);
-        return JSONResult;
+        return new APIRegistration().addUserToDB(userEMAIL, userPassword);
     }
     @PostMapping("/login")
-    public void loginUser(){
-
+    public Map<String, Boolean> loginUser(@RequestBody @NotNull userCredentials userCredentials) throws SQLException{
+        String userEMAIL = userCredentials.getEmail();
+        String userPassword = userCredentials.getPassword();
+        return new APILogin().loginUser(userEMAIL, userPassword);
     }
 
     //тут тупа для проверки это, пон (оно работает)
