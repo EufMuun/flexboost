@@ -17,4 +17,10 @@ public class API {
     public void loginUser(){
 
     }
+
+    //тут тупа для проверки это, пон (оно работает)
+    @RequestMapping("/hello")
+    public String helloWorld() {
+        return "Hello, World!";
+    }
 }

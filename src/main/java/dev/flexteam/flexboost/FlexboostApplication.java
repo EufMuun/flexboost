@@ -7,7 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class FlexboostApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(FlexboostApplication.class, args);
+		SpringApplication app = new SpringApplication(FlexboostApplication.class);
+		app.run();
+
 	}
 
 }
