@@ -1,22 +1,22 @@
 package dev.flexteam.flexboost.objects;
 
 public class userCredentials {
-    String email;
-    String password;
+    private String email;
+    private String password;
 
-    void setEmail(String email){
+    public void setEmail(String email){
         this.email = email;
     }
 
-    void setPassword(){
+    public void setPassword(){
         this.password = password;
     }
 
-    String getEmail(){
+    public String getEmail(){
         return this.email;
     }
 
-    String getPassword(){
+    public String getPassword(){
         return this.password;
     }
 

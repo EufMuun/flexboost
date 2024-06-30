@@ -1,5 +1,4 @@
 package dev.flexteam.flexboost;
-import org.postgresql.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -13,7 +12,11 @@ public class ConnectToDB {
 
 
     public Connection getConnection() throws SQLException {
-        connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        try {
+            connection = DriverManager.getConnection(URL, USER, PASSWORD);
+        } catch (SQLException e){
+            return null;
+        }
         return connection;
     }
 }
