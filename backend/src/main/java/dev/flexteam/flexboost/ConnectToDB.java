@@ -5,7 +5,7 @@ import java.sql.SQLException;
 public class ConnectToDB {
 
     //Сюда надо будет вписать url и пароль созданной БД.
-    private final String URL = "jdbc:postgresql://localhost:5432/flexdb";
+    private final String URL = "jdbc:postgresql://db:5432/flexdb";
     private final String USER = "flexdev";
     private final String PASSWORD = "flexdev";
     private Connection connection;

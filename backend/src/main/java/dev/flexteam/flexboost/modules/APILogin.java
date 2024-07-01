@@ -15,7 +15,7 @@ public class APILogin {
         Map<String, String> JSONResult = new HashMap<String, String>();
         //если email есть в БД
         if(checkIfUserExist(email)){
-            PreparedStatement prSt = connection.prepareStatement("SELECT (pass = crypt('?', pass)) as password_match FROM user_credentials uc WHERE eMail = ?");
+            PreparedStatement prSt = connection.prepareStatement("SELECT ? as password_match FROM flex_schema.user_credentials uc WHERE eMail = ?");
             prSt.setString(1, email);
             //executeQuery возвращает сразу ResultSet (есть ещё просто execute, он возвращает тру или фолс, в зависимости есть ли что-то в ответе)
 
@@ -51,13 +51,13 @@ public class APILogin {
     }
 
     private boolean checkIfUserExist(String email) throws SQLException {
-        Statement statement = connection.createStatement();
+        //Statement statement = connection.createStatement();
 
-        PreparedStatement prSt = connection.prepareStatement("SELECT * FROM user_credentials WHERE email = ?");
+        PreparedStatement prSt = connection.prepareStatement("SELECT * FROM flex_schema.user_credentials WHERE email = ?");
         prSt.setString(1, email);
 
         //Функция execute возвращает ложь, если результат пустой (пользователя с такой почтой нет)
-        boolean result = statement.execute(prSt.toString());
+        boolean result = prSt.execute();
         return result;
     }
 }

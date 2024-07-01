@@ -10,6 +10,7 @@ public class FlexboostApplication {
 		SpringApplication app = new SpringApplication(FlexboostApplication.class);
 		app.run();
 
+
 	}
 
 }
