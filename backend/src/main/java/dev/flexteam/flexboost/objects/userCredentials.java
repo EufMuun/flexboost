@@ -8,7 +8,7 @@ public class userCredentials {
         this.email = email;
     }
 
-    public void setPassword(){
+    public void setPassword(String password){
         this.password = password;
     }
 
