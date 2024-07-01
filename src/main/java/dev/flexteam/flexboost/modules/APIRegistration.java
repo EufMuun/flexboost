@@ -7,9 +7,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class APIRegistration {
-    private ConnectToDB connect = new ConnectToDB();
-    private Connection connection;
+    private final Connection connection;
     public APIRegistration() throws SQLException {
+        ConnectToDB connect = new ConnectToDB();
         connection = connect.getConnection();
     }
     //Вначале проверям, если пользователя нет, то проводим все манипуляции по вставке его в таблицу, иначе возвращаем
@@ -18,7 +18,7 @@ public class APIRegistration {
     public Map<String, String> addUserToDB(String email, String password) throws SQLException {
         Map<String, String> JSONResult = new HashMap<String, String>();
         if(!checkIfUserAlreadyExist(email)){
-            PreparedStatement prSt = connection.prepareStatement("INSERT INTO user_credentials VALUES (?, ?)");
+            PreparedStatement prSt = connection.prepareStatement("INSERT INTO user_credentials (email, password) VALUES (?, crypt(?, gen_salt('md5')))");
             prSt.setString(1, email);
             prSt.setString(2, password);
             try {
