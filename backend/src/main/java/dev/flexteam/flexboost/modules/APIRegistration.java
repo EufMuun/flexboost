@@ -17,15 +17,17 @@ public class APIRegistration {
     //если всё норм, возвращается JSON с true
     public Map<String, String> addUserToDB(String email, String password) throws SQLException {
         Map<String, String> JSONResult = new HashMap<String, String>();
-        if(!checkIfUserAlreadyExist(email)){
-            PreparedStatement prSt = connection.prepareStatement("INSERT INTO user_credentials (email, password) VALUES (?, crypt(?, gen_salt('md5')))");
+        Boolean isConValid = connection.isValid(5);
+        if (!checkIfUserAlreadyExist(email)) {
+
+            PreparedStatement prSt = connection.prepareStatement("INSERT INTO flex_schema.user_credentials (email,password) VALUES (?, ?)");
 
             prSt.setString(1, email);
             prSt.setString(2, password);
             try {
-                prSt.execute(prSt.toString());
+                prSt.executeQuery();
             } catch (SQLException e){
-                JSONResult.put("Result:", e.toString());
+                JSONResult.put("Result:", "error");
                 return JSONResult;
             }
             JSONResult.put("Result:", "true");
@@ -36,15 +38,18 @@ public class APIRegistration {
         return JSONResult;
     }
 
+
     //Проверяем не занят ли логин
-    private boolean checkIfUserAlreadyExist(String email) throws SQLException {
-        Statement statement = connection.createStatement();
-
-        PreparedStatement prSt = connection.prepareStatement("SELECT * FROM user_credentials WHERE email = ?");
-        prSt.setString(1, email);
-
-        //Функция execute возвращает ложь, если результат пустой (пользователя с такой почтой нет)
-        boolean result = statement.execute(prSt.toString());
-        return result;
+    private boolean checkIfUserAlreadyExist(String email) {
+        String selectQuery = "SELECT * FROM flex_schema.user_credentials WHERE email = ?";
+        try (PreparedStatement prSt = connection.prepareStatement(selectQuery)) {
+            prSt.setString(1, email);
+            try (ResultSet rs = prSt.executeQuery()) {
+                return rs.next();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }
