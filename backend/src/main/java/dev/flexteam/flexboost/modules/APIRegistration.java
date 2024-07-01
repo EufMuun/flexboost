@@ -19,6 +19,7 @@ public class APIRegistration {
         Map<String, String> JSONResult = new HashMap<String, String>();
         if(!checkIfUserAlreadyExist(email)){
             PreparedStatement prSt = connection.prepareStatement("INSERT INTO user_credentials (email, password) VALUES (?, crypt(?, gen_salt('md5')))");
+
             prSt.setString(1, email);
             prSt.setString(2, password);
             try {
