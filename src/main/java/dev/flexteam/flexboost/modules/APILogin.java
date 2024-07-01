@@ -11,14 +11,21 @@ public class APILogin {
     public APILogin() throws SQLException {
         connection = connect.getConnection();
     }
-    public Map<String, Boolean> loginUser(String email, String password) throws SQLException {
-        Map<String, Boolean> JSONResult = new HashMap<String, Boolean>();
+    public Map<String, String> loginUser(String email, String password) throws SQLException {
+        Map<String, String> JSONResult = new HashMap<String, String>();
         //если email есть в БД
         if(checkIfUserExist(email)){
-            PreparedStatement prSt = connection.prepareStatement("SELECT password FROM user_credential WHERE email = ?");
+            PreparedStatement prSt = connection.prepareStatement("SELECT (pass = crypt('?', pass)) as password_match FROM user_credentials uc WHERE eMail = ?");
             prSt.setString(1, email);
             //executeQuery возвращает сразу ResultSet (есть ещё просто execute, он возвращает тру или фолс, в зависимости есть ли что-то в ответе)
-            ResultSet result = prSt.executeQuery();
+
+            ResultSet result;
+            try {
+                result = prSt.executeQuery();
+            } catch(SQLException e){
+                JSONResult.put("Result", e.toString());
+                return JSONResult;
+            }
             //по умолчанию мы стоим на нулевом результате запроса, а они начинаются с первого.
 
             result.next();
@@ -26,17 +33,19 @@ public class APILogin {
             //пароля по email будет только один
             String passwordFromDB = result.getString("password");
             if(Objects.equals(password, passwordFromDB)){
-                JSONResult.put("Result", true);
+                //если пароль верный
+                JSONResult.put("Result", "true");
                 return JSONResult;
             } else{
-                JSONResult.put("Result", false);
+                //если пароль не верный
+                JSONResult.put("Result", "false");
                 return JSONResult;
             }
 
         }
         //если email нет в БД
         else{
-            JSONResult.put("Result", false);
+            JSONResult.put("Result", "false");
             return JSONResult;
         }
     }
