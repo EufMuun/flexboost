@@ -56,7 +56,7 @@ services:
     environment:
       - MINIO_ROOT_USER=flexboost
       - MINIO_ROOT_PASSWORD=flexboost
-      - MINIO_DEFAULT_BUCKETS=content
+      - MINIO_DEFAULT_BUCKETS=content:public
     expose:
       - 9000:9000
     volumes:
