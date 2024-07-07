@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class APILogin {
     private ConnectToDB connect = new ConnectToDB();
@@ -32,7 +33,9 @@ public class APILogin {
             //по логике всего приложения, для одного email может быть только один пароль, потому и результат запроса
             //пароля по email будет только один
             String passwordFromDB = result.getString("password");
-            if(Objects.equals(password, passwordFromDB)){
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            String passwordEncoded = passwordEncoder.encode(password);
+            if(Objects.equals(passwordEncoded, passwordFromDB)){
                 //если пароль верный
                 JSONResult.put("Result", "true");
                 return JSONResult;
