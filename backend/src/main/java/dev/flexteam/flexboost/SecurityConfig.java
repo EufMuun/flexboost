@@ -14,12 +14,8 @@ import org.springframework.security.web.server.SecurityWebFilterChain;
 public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http
-                .authorizeHttpRequests(customizer -> customizer
-                        .requestMatchers("/api/login").permitAll()
-                        .requestMatchers("/api/hello").permitAll()
-                        .requestMatchers("/api/**").authenticated()
-                        .anyRequest().denyAll())
-                .build();
+        http.authorizeRequests(authorizeRequests -> authorizeRequests.anyRequest()
+                .permitAll());
+        return http.build();
     }
 }
