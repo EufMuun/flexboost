@@ -8,6 +8,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -39,7 +41,7 @@ public class loadpost {
 
             minioClient.putObject(
                     PutObjectArgs.builder().bucket("content").object("my-objectname").stream(
-                                    inputStream, size, -1)
+                                    inputStream, file.getSize(), -1)
                             .contentType("video/mp4")
                             .build());
 
@@ -48,6 +50,10 @@ public class loadpost {
         } catch (IOException | MinioException e) {
             e.printStackTrace();
             response.put("message", "Error uploading file: " + e.getMessage());
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        } catch (InvalidKeyException e) {
+            throw new RuntimeException(e);
         }
         return response;
     }
