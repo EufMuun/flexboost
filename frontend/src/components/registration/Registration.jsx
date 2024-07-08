@@ -2,11 +2,14 @@ import axios from 'axios';
 import {Input} from "../../utils/registration/Input";
 import {useState} from "react";
 import "../../css/auth-reg.css"
+import {login} from "../../store/slice/auth/auth-index";
+import {useDispatch} from "react-redux";
 
 export const Registration = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
+    const dispatch = useDispatch()
 
     const regAction = async (email, password) => {
         try {
@@ -16,6 +19,7 @@ export const Registration = () => {
             })
             /*alert(response.data)*/
             /*alert(response.data.message)*/
+            await dispatch(login(response.data));
             alert(response.data.result)
         } catch (e) {
             alert(e)
