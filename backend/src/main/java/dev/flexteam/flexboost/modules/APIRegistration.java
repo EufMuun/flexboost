@@ -41,13 +41,13 @@ public class APIRegistration {
                 String insertUserInfoSQL = "INSERT INTO flex_schema.user_info (uid, displayName) VALUES (?, ?)";
                 PreparedStatement insertUserInfoStmt = connection.prepareStatement(insertUserInfoSQL);
                 insertUserInfoStmt.setInt(1, userId);
-                insertUserInfoStmt.setString(2, "Заглушка никнейма");
+                insertUserInfoStmt.setString(2, email);
                 insertUserInfoStmt.executeUpdate();
 
                 // Вставка в profile
                 String insertProfileSQL = "INSERT INTO flex_schema.profile (profileURL) VALUES (?) RETURNING profileID";
                 PreparedStatement insertProfileStmt = connection.prepareStatement(insertProfileSQL);
-                insertProfileStmt.setString(1, "Заглушка profile_url");
+                insertProfileStmt.setString(1, email);
                 ResultSet profileResult = insertProfileStmt.executeQuery();
                 profileResult.next();
                 int profileId = profileResult.getInt("profileID");

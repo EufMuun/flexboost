@@ -15,7 +15,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class loadpost {
+public class loadpostAPI {
     private final ConnectToDB connect = new ConnectToDB();
     private MinioClient minioClient;
     public void APILogin() throws SQLException {
