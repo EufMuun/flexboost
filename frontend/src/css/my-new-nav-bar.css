@@ -1,0 +1,90 @@
+:root {
+    --bg-color: #303030;
+    --colour-acc-alt: #58C4DC;
+    --color-acc-pink: #C74680;
+}
+
+.link {
+    text-decoration: none;
+}
+
+.header-nav-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+    padding: 0 50px;
+    background-color: var(--bg-color);
+    color: white;
+}
+
+.search-profile {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/*NewNavBar*/
+
+.new-nav-bar-header{
+    background-color: var(--bg-color);
+    /*opacity: 0.95;*/
+    color: white;
+}
+
+.center-buttons {
+    color: white;
+    font-size: 16px;
+}
+
+.center-buttons {
+    cursor: pointer;
+}
+
+.logo-name {
+    font-weight: bold;
+    color: inherit;
+    font-size: 20px;
+}
+
+.to-auth-header {
+    cursor: pointer;
+    color: var(--colour-acc-alt);
+}
+
+.to-signup-header {
+    cursor: pointer;
+    color: var(--colour-acc-alt);
+    background-color: var(--bg-color);
+    border: var(--colour-acc-alt);
+    padding: 1px 8px;
+    font-size: 16px;
+    border: 2px solid var(--colour-acc-alt);
+}
+
+.active-nav-button {
+    font-weight: bold;
+    cursor: pointer;
+    color: var(--colour-acc-alt);
+}
+
+
+ul {
+    padding: 0;
+    margin: 0;
+}
+
+.avatar {
+    padding: 0;
+    border: none;
+
+}
+
+.to-profile-header {
+    font-weight: 600;
+    color: var(--colour-acc-alt);
+}
+
+.dropdown-menu-header {
+
+}

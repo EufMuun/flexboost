@@ -1,0 +1,110 @@
+.auth-form {
+    display: grid;
+    justify-content: center;
+
+}
+
+.rectangle {
+    display: grid;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /*material*/
+    justify-content: center;
+    background-color: rgba(127, 255, 212, 0.5);
+    /*background-color: #303030;*/
+    /*background-color: #7FFFD4;*/
+    border-radius: 8px;
+    /*padding: 20px;*/
+    min-width: 300px;
+}
+
+.auth-body {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.form-input {
+    font-family: 'Trebuchet MS', serif;
+    border-radius: 5px;
+    border: 2px solid white;
+    background-color: rgba(127, 255, 212, 0.5);
+    width: 190px;
+    height: 25px;
+    padding: 4px 12px;
+    font-size: 16px;
+    margin-bottom: 15px;
+    transition: background-color 0.23s, border-color 0.6s;
+}
+
+.form-input::placeholder {
+    font-family: 'Trebuchet MS', serif;
+}
+
+.form-input:focus {
+    outline: none;
+    background-color: rgba(0, 209, 139, 0.29)
+}
+
+.form-input:hover {
+    background-color: rgba(0, 209, 139, 0.29);
+}
+
+.auth-button {
+    font-family: 'Trebuchet MS', serif;
+    border-radius: 4px;
+    border: 2px solid white;
+    background-color: rgba(79, 227, 178, 0.6);
+    padding: 6px 0;
+    margin-top: 5px;
+    margin-bottom: 19px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.23s;
+}
+
+.auth-button:hover, .button-to-reg:hover {
+    background-color: rgba(40, 224, 163, 0.8);
+}
+
+.auth-button:disabled {
+    color: inherit;
+    cursor: not-allowed;
+}
+
+.p-auth {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.hr-form {
+    width: 175px;
+
+}
+
+.p-question {
+    margin-bottom: 8px;
+    font-size: 15px;
+}
+
+.button-to-reg {
+    font-family: 'Trebuchet MS', serif;
+    border-radius: 4px;
+    border: 2px solid white;
+    background-color: rgba(79, 227, 178, 0.65);
+    margin-bottom: 17px;
+    padding: 4px 9px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.23s;
+}
+
+.auth-button:hover, .button-to-reg:hover {
+    background-color: rgba(40, 224, 163, 0.8);
+}
+
+.user-profile-main {
+    display: flex;
+    justify-content: center;
+
+}
