@@ -8,12 +8,13 @@ import avatar from "../../../assets/img/userpage/avatar.svg"
 import {Button, Progress, Spinner} from "@nextui-org/react";
 import {useEffect, useState} from "react";
 import axios from "axios";
+import {api} from "../../../utils/axios/api";
 
 
 export const UserPage = () => {
     const {id} = useParams()
     const user = useSelector((state) => state.auth.user);
-/*    const dispatch = useDispatch();*/
+    /*    const dispatch = useDispatch();*/
 
     const displayName = () => {
         return "Altushka-1337"
@@ -40,8 +41,8 @@ export const UserPage = () => {
     useEffect(() => {
         const getUserInfo = async () => {
             try {
-                const response = await axios.get(`https://reqres.in/api/users/${id}`)
-                setUserData(response.data.data)
+                const response = await api.get(`loadprofileinfo/profileURL=${id}`)
+                setUserData(response.data)
                 console.log(userData)
             } catch (e) {
                 alert(e)
@@ -59,16 +60,17 @@ export const UserPage = () => {
     }
 
 
-/*    const handleUpdateUser = () => {
-        dispatch(updateUser({ email: "xdddd@gmail.com"}));
-    };*/
+    /*    const handleUpdateUser = () => {
+            dispatch(updateUser({ email: "xdddd@gmail.com"}));
+        };*/
 
     return (
         <div>
             <div className={"frame-border"}>
                 <div className={"profile-container"}>
                     <div className={"info-ava-profile"}>
-                        <img src={avatar} alt={"txt"} className={"img-avatar"}/>
+                        {/*<img src={avatar} alt={"txt"} className={"img-avatar"}/>*/}
+                        <img src={userData.img_avatar} alt={"txt"} className={"img-avatar"}/>
                         {checkId() ? (
                             <Link to={"/"}>
                                 <img src={edit_icon} alt={"edit"} className={"edit-icon"}/>
@@ -80,17 +82,17 @@ export const UserPage = () => {
                         )}
 
                         <div className={"user-info"}>
-                            <span className={"display-name-header-profile"}>{displayName()}</span>
+                            <span className={"display-name-header-profile"}>{userData.displayname}</span>
                             <div className={"id-bio-container"}>
-                                <span className={"id-profile-header"}>@{userData.first_name}</span>
+                                <span className={"id-profile-header"}>@{userData.url_prof}</span>
                                 {/*<span className={"id-profile-header"}>@{idProfileURL()}</span>*/}
-                                <span className={"id-profile-header overflow-hide-bio"}>Lorem ipsum bio {userData.last_name}</span>
+                                <span className={"id-profile-header overflow-hide-bio"}>{userData.micro_bio}</span>
                             </div>
                         </div>
                     </div>
                     <div className={"banner"}>
                         {/*<img src={userData.avatar} alt={"banner"} className={"banner"}/>*/}
-                        <img src={"https://i.ibb.co/YkNdSM3/Banner.png"} alt={"banner"} className={"banner"}/>
+                        <img src={userData.img_banner} alt={"banner"} className={"banner"}/>
                     </div>
                 </div>
 
@@ -103,25 +105,26 @@ export const UserPage = () => {
                             </div>
 
 
-                                {!checkId() ? (
-                                    <div className={"buttons-interact-user"}>
-                                        <Button className={"sub-button"}>Подписаться - 169₽</Button>
-                                        <Button className={"interactive-buttons"}>Отслеживать</Button>
-                                        <Button className={"interactive-buttons"}>Донат</Button>
-                                        <Button className={"interactive-buttons"}>Сообщение</Button>
-                                    </div>
-                                ) : (
-                                        <div className={"buttons-interact-user"}>
-                                        <Button className={"sub-button"}>Новый пост</Button>
-                                        <Button className={"interactive-buttons"}>Статистика</Button>
-                                        </div>
+                            {!checkId() ? (
+                                <div className={"buttons-interact-user"}>
+                                    <Button className={"sub-button"}>Подписаться - 169₽</Button>
+                                    <Button className={"interactive-buttons"}>Отслеживать</Button>
+                                    <Button className={"interactive-buttons"}>Донат</Button>
+                                    <Button className={"interactive-buttons"}>Сообщение</Button>
+                                </div>
+                            ) : (
+                                <div className={"buttons-interact-user"}>
+                                    <Button className={"sub-button"}>Новый пост</Button>
+                                    <Button className={"interactive-buttons"}>Статистика</Button>
+                                </div>
                             )}
 
                         </div>
 
                         <div className={"about-container"}>
                             <span className={"fs24-fw400"}>About</span>
-                            <span className={"about-author"}>Lorem ipsum Lorem ip Lorem ipsum Lorem ip Lorem ipsum ipsum m ipsum Lorem ip Lorem ipsum m ipsum Lorem ip Lorem Lor Lorem ip Lor Lorem ip Lor Lorem ip Lorem ipsum orem ipsum Lorem ip Lorem ipsum m ipsum Lorem ip Lorem ipsum m ipsum Lorem ip Lorem ipsum... read more</span>
+                            <span className={"about-author"}>{userData.about_info}</span>
+                            {/*<span className={"about-author"}>Lorem ipsum Lorem ip Lorem ipsum Lorem ip Lorem ipsum ipsum m ipsum Lorem ip Lorem ipsum m ipsum Lorem ip Lorem Lor Lorem ip Lor Lorem ip Lor Lorem ip Lorem ipsum orem ipsum Lorem ip Lorem ipsum m ipsum Lorem ip Lorem ipsum m ipsum Lorem ip Lorem ipsum... read more</span>*/}
                         </div>
                     </div>
 
@@ -142,38 +145,38 @@ export const UserPage = () => {
             </div>
 
             <div className={"frame-border frame-border-pink"}>
-               <div className={"posts-frame-user"}>
-                   <div className={"posts-profile-header"}>
-                       <span className={"fs-40-fw400"}>Posts by Altushka-1337</span>
-                       <span className={"fs32-fw300"}>69 posts</span>
-                   </div>
+                <div className={"posts-frame-user"}>
+                    <div className={"posts-profile-header"}>
+                        <span className={"fs-40-fw400"}>Posts by Altushka-1337</span>
+                        <span className={"fs32-fw300"}>69 posts</span>
+                    </div>
 
-                   {/*посты*/}
-                   <div className={"post-frame"}>
-                       <div className={"post-banner-info-user"}>
-                           <div className={"post-banner"}>
+                    {/*посты*/}
+                    <div className={"post-frame"}>
+                        <div className={"post-banner-info-user"}>
+                            <div className={"post-banner"}>
                                 <span>header</span>
-                           </div>
-                           <div className={"post-banner-about"}>
-                               <span>@hello</span>
-                           </div>
-                       </div>
+                            </div>
+                            <div className={"post-banner-about"}>
+                                <span>@hello</span>
+                            </div>
+                        </div>
 
-                       <div className={"post-media-info"}>
-                           <div className={"post-media-preview"}>
-                               <span>img</span>
-                           </div>
-                           <div className={"post-info-with-likes"}>
+                        <div className={"post-media-info"}>
+                            <div className={"post-media-preview"}>
+                                <span>img</span>
+                            </div>
+                            <div className={"post-info-with-likes"}>
                                 <span className={"post-span-info"}>info info info</span>
-                               <div className={"post-likes-comments"}>
-                                   likes <br/> comments
-                               </div>
-                           </div>
-                       </div>
+                                <div className={"post-likes-comments"}>
+                                    likes <br/> comments
+                                </div>
+                            </div>
+                        </div>
 
 
-                   </div>
-               </div>
+                    </div>
+                </div>
 
 
 
