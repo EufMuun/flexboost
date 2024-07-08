@@ -15,7 +15,8 @@ export const Registration = () => {
                 password
             })
             /*alert(response.data)*/
-            alert(response.data.message)
+            /*alert(response.data.message)*/
+            alert(response.data.result)
         } catch (e) {
             alert(e)
             /*alert(e.response.data.message)*/

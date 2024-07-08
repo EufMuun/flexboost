@@ -22,8 +22,8 @@ export const Auth = () => {
             })
             /*alert(response.data)*/
             await dispatch(login(response.data)); //передаем поулченные данные в редьюсер в auth
-            navigate('/')
             alert(response.data)
+            navigate('/')
         } catch (e) {
             alert(e)
         }

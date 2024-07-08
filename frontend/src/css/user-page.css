@@ -63,6 +63,7 @@
     height: 244px;
     padding-left: 28px;
     padding-top: 26px;
+    border-radius: 150px;
 }
 
 .banner {
@@ -108,14 +109,17 @@
 .interactive-panel-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     background-color: var(--bg-color);
     color: white;
     width: 872px;
     height: 96px;
+    box-sizing: border-box;
+    padding: 0 30px;
     /*margin-top: 15px;*/
     /*margin-left: 16px; !*поменять потом*!*/
     border: 1px solid var(--bg-color);
+
 
 }
 
@@ -222,6 +226,8 @@
 }
 
 .posts-frame-user {
+    display: flex;
+    flex-direction: column;
     width: 1464px;
     background-color: var(--bg-color);
     color: white;
@@ -249,10 +255,62 @@
 /*пост*/
 
 .post-frame {
+    align-self: center;
     display: flex;
-
-    background-color: white;
+    flex-direction: column;
+    background-color: green;
     color: black;
     width: 1348px;
     height: 616px;
+}
+
+.post-banner-info-user {
+    display: flex;
+    flex-direction: row;
+}
+
+.post-banner {
+    width: 1040px;
+    height: 168px;
+    background-color: red;
+}
+
+.post-banner-about {
+    width: 309px;
+    height: 168px;
+    background-color: pink;
+}
+
+.post-media-info {
+    display: flex;
+    flex-direction: row;
+}
+
+.post-media-preview {
+    background-color: violet;
+    width: 1039px;
+    height: 449px;
+}
+
+.post-info-with-likes {
+    display: flex;
+    flex-direction: column;
+    background-color: brown;
+    /*height: 449px;*/
+    height: 100%;
+    width: 309px;
+   /* align-items: stretch;*/
+}
+
+.post-span-info {
+    /*height: 259px;*/
+    height: 63%;
+}
+
+.post-likes-comments {
+    background-color: darkviolet;
+    display: flex;
+    flex-direction: column;
+    height: 37%;
+
 }
