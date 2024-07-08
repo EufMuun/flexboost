@@ -5,7 +5,7 @@ import edit_icon from "../../../assets/img/userpage/edit_Icon.svg"
 import report_icon from "../../../assets/img/userpage/report-icon.svg"
 
 import avatar from "../../../assets/img/userpage/avatar.svg"
-import {Button, Progress} from "@nextui-org/react";
+import {Button, Progress, Spinner} from "@nextui-org/react";
 import {useEffect, useState} from "react";
 import axios from "axios";
 
@@ -13,6 +13,7 @@ import axios from "axios";
 export const UserPage = () => {
     const {id} = useParams()
     const user = useSelector((state) => state.auth.user);
+/*    const dispatch = useDispatch();*/
 
     const displayName = () => {
         return "Altushka-1337"
@@ -41,6 +42,7 @@ export const UserPage = () => {
             try {
                 const response = await axios.get(`https://reqres.in/api/users/${id}`)
                 setUserData(response.data.data)
+                console.log(userData)
             } catch (e) {
                 alert(e)
             }
@@ -49,12 +51,17 @@ export const UserPage = () => {
     }, [id]) //id в массив зависимостей, то есть, если изменится айди, происходит новый запрос
 
     if (!userData) {
-        return <div>Loading...</div>;
+        return /*<div>Loading...</div>*/ <Spinner/>;
     }
 
     const checkId = () => {
         return id === user.id;
     }
+
+
+/*    const handleUpdateUser = () => {
+        dispatch(updateUser({ email: "xdddd@gmail.com"}));
+    };*/
 
     return (
         <div>
@@ -82,6 +89,7 @@ export const UserPage = () => {
                         </div>
                     </div>
                     <div className={"banner"}>
+                        {/*<img src={userData.avatar} alt={"banner"} className={"banner"}/>*/}
                         <img src={"https://i.ibb.co/YkNdSM3/Banner.png"} alt={"banner"} className={"banner"}/>
                     </div>
                 </div>
@@ -95,7 +103,7 @@ export const UserPage = () => {
                             </div>
 
 
-                                {checkId() ? (
+                                {!checkId() ? (
                                     <div className={"buttons-interact-user"}>
                                         <Button className={"sub-button"}>Подписаться - 169₽</Button>
                                         <Button className={"interactive-buttons"}>Отслеживать</Button>
@@ -139,9 +147,34 @@ export const UserPage = () => {
                        <span className={"fs-40-fw400"}>Posts by Altushka-1337</span>
                        <span className={"fs32-fw300"}>69 posts</span>
                    </div>
+
+                   {/*посты*/}
+                   <div className={"post-frame"}>
+                       <div className={"post-banner-info-user"}>
+                           <div className={"post-banner"}>
+                                <span>header</span>
+                           </div>
+                           <div className={"post-banner-about"}>
+                               <span>@hello</span>
+                           </div>
+                       </div>
+
+                       <div className={"post-media-info"}>
+                           <div className={"post-media-preview"}>
+                               <span>img</span>
+                           </div>
+                           <div className={"post-info-with-likes"}>
+                                <span className={"post-span-info"}>info info info</span>
+                               <div className={"post-likes-comments"}>
+                                   likes <br/> comments
+                               </div>
+                           </div>
+                       </div>
+
+
+                   </div>
                </div>
 
-                {/*посты*/}
 
 
 
