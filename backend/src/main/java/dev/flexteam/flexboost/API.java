@@ -41,7 +41,6 @@ public class API {
     }
 
 
-    //тут тупа для проверки это, пон (оно работает)
     @RequestMapping("/hello")
     public String helloWorld() {
         return "Hello, World! eeeee! eeeeeee";
