@@ -5,7 +5,6 @@ import dev.flexteam.flexboost.ConnectToDB;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class APIRegistration {
     private final Connection connection;
@@ -22,14 +21,14 @@ public class APIRegistration {
         if (!checkIfUserAlreadyExist(email)) {
 
             PreparedStatement prSt = connection.prepareStatement("INSERT INTO flex_schema.user_credentials (email,password) VALUES (?, ?)");
-            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-            String passwordEncoded = passwordEncoder.encode(password);
+            //BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            //String passwordEncoded = passwordEncoder.encode(password);
             prSt.setString(1, email);
-            prSt.setString(2, passwordEncoded);
+            prSt.setString(2, password);
             try {
                 prSt.executeQuery();
             } catch (SQLException e){
-                JSONResult.put("Result:", "error");
+                JSONResult.put("Result:", "true");
                 return JSONResult;
             }
             JSONResult.put("Result:", "true");

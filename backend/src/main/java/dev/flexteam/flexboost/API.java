@@ -21,7 +21,6 @@ public class API {
     public Map<String, String> registerUser(@RequestBody userCredentials userCredentials) throws SQLException {
         String userEMAIL = userCredentials.getEmail();
         String userPassword = userCredentials.getPassword();
-        Map<String, String> JSONResult = new HashMap<String, String>();
         return new APIRegistration().addUserToDB(userEMAIL, userPassword);
     }
     @PostMapping("/login")

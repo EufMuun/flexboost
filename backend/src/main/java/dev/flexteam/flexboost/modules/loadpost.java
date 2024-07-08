@@ -16,12 +16,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class loadpost {
-    private ConnectToDB connect = new ConnectToDB();
-    private Connection connection;
+    private final ConnectToDB connect = new ConnectToDB();
     private MinioClient minioClient;
     public void APILogin() throws SQLException {
-        connection = connect.getConnection();
-        this.minioClient = minioClient;
+        Connection connection = connect.getConnection();
     }
 
     public Map<String, String> loadpost(MultipartFile file ){
@@ -38,11 +36,10 @@ public class loadpost {
 
             // Загружаем файл в MinIO
             InputStream inputStream = file.getInputStream();
-
             minioClient.putObject(
-                    PutObjectArgs.builder().bucket("content").object("my-objectname").stream(
+                    PutObjectArgs.builder().bucket("content").object("filename").stream(
                                     inputStream, file.getSize(), -1)
-                            .contentType("video/mp4")
+                            .contentType("image/png")
                             .build());
 
             // Возвращаем успешный ответ
