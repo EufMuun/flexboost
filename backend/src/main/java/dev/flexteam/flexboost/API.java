@@ -37,11 +37,12 @@ public class API {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/loadprofileinfo")
-    public Map<String, String> loadprofileinfo(@RequestParam String profileURL) throws SQLException{
+    public Map<String, String> loadprofileinfo(@RequestParam(name = "profileURL") String profileURL) throws SQLException{
 
         return new loadProfileInfoAPI().loadProfileInfo(profileURL);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/loadpost")
     public Map<String, String> loadPost(@RequestParam("file") MultipartFile file, @RequestBody userCredentials userCredentials){
 

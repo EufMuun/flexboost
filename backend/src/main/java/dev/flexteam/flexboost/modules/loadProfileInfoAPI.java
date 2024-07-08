@@ -18,7 +18,7 @@ public class loadProfileInfoAPI {
     }
     public Map<String, String> loadProfileInfo(String profileURL) throws SQLException {
         Map<String, String>JSONResult = new HashMap<String, String>();
-        PreparedStatement prSt = connection.prepareStatement("select uc.uid, uc.email, p.profileid, up.profileid, p.profileurl, ui.displayname from user_credentials uc join user_info ui on ui.uid = uc.uid join user_profile up on uc.uid = up.uid join profile p on p.profileid = up.profileid where p.profileurl = ?;");
+        PreparedStatement prSt = connection.prepareStatement("select p.bio, p.description, p.profileurl, ui.displayname, p.banner_pic_link, p.pfplink from user_credentials uc join user_info ui on ui.uid = uc.uid join user_profile up on uc.uid = up.uid join profile p on p.profileid = up.profileid where p.profileurl = ?");
         prSt.setString(1, profileURL);
         ResultSet resultSet = prSt.executeQuery();
         resultSet.next();
@@ -36,11 +36,19 @@ public class loadProfileInfoAPI {
         String displayname = resultSet.getString("displayname");
         resultSet.next();
 
+        String bannerPicLink = resultSet.getString("banner_pic_link");
+        resultSet.next();
+
+        String pfplink = resultSet.getString("pfplink");
+        resultSet.next();
+
 
         JSONResult.put("displayname", displayname);
         JSONResult.put("@ (url_prof)", profileURL);
         JSONResult.put("micro_bio", bio);
         JSONResult.put("about_info", description);
+        JSONResult.put("bannerPicLink", bannerPicLink);
+        JSONResult.put("pfplink", pfplink);
 
 
         return JSONResult;
