@@ -29,16 +29,21 @@ public class APILogin {
             }
             //по умолчанию мы стоим на нулевом результате запроса, а они начинаются с первого.
             String passwordFromDB = null;
+            int userID = 0;
             if (result.next()) {
                 //по логике всего приложения, для одного email может быть только один пароль, потому и результат запроса
                 //пароля по email будет только один
                  passwordFromDB = result.getString("password");
+                 userID = result.getInt("uid");
             }
-            //BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-            //String passwordEncoded = passwordEncoder.encode(password);
+
+
             if(Objects.equals(passwordFromDB, password)){
                 //если пароль верный
-                JSONResult.put("Result", "true");
+                JSONResult.put("id", String.valueOf(userID));
+                JSONResult.put("email", email);
+                JSONResult.put("author", "true");
+                JSONResult.put("result", "true");
                 return JSONResult;
             } else{
                 //если пароль не верный
