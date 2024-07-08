@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class APILogin {
     private ConnectToDB connect = new ConnectToDB();
@@ -15,7 +16,7 @@ public class APILogin {
         Map<String, String> JSONResult = new HashMap<String, String>();
         //если email есть в БД
         if(checkIfUserExist(email)){
-            PreparedStatement prSt = connection.prepareStatement("SELECT ? as password_match FROM flex_schema.user_credentials uc WHERE eMail = ?");
+            PreparedStatement prSt = connection.prepareStatement("SELECT * FROM flex_schema.user_credentials WHERE email = ?");
             prSt.setString(1, email);
             //executeQuery возвращает сразу ResultSet (есть ещё просто execute, он возвращает тру или фолс, в зависимости есть ли что-то в ответе)
 
@@ -27,12 +28,15 @@ public class APILogin {
                 return JSONResult;
             }
             //по умолчанию мы стоим на нулевом результате запроса, а они начинаются с первого.
-
-            result.next();
-            //по логике всего приложения, для одного email может быть только один пароль, потому и результат запроса
-            //пароля по email будет только один
-            String passwordFromDB = result.getString("password");
-            if(Objects.equals(password, passwordFromDB)){
+            String passwordFromDB = null;
+            if (result.next()) {
+                //по логике всего приложения, для одного email может быть только один пароль, потому и результат запроса
+                //пароля по email будет только один
+                 passwordFromDB = result.getString("password");
+            }
+            //BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            //String passwordEncoded = passwordEncoder.encode(password);
+            if(Objects.equals(passwordFromDB, password)){
                 //если пароль верный
                 JSONResult.put("Result", "true");
                 return JSONResult;
