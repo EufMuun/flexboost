@@ -1,6 +1,7 @@
 package dev.flexteam.flexboost;
 import dev.flexteam.flexboost.modules.APILogin;
 import dev.flexteam.flexboost.modules.APIRegistration;
+import dev.flexteam.flexboost.modules.loadProfileInfoAPI;
 import dev.flexteam.flexboost.objects.Post;
 import dev.flexteam.flexboost.objects.userCredentials;
 import org.springframework.web.bind.annotation.*;
@@ -19,19 +20,26 @@ import java.util.Map;
 @RequestMapping("/api")
 public class API {
 
-		@CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/registration")
     public Map<String, String> registerUser(@RequestBody userCredentials userCredentials) throws SQLException {
         String userEMAIL = userCredentials.getEmail();
         String userPassword = userCredentials.getPassword();
         return new APIRegistration().addUserToDB(userEMAIL, userPassword);
     }
-		@CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/login")
     public Map<String, String> loginUser(@RequestBody userCredentials userCredentials) throws SQLException{
         String userEMAIL = userCredentials.getEmail();
         String userPassword = userCredentials.getPassword();
         return new APILogin().loginUser(userEMAIL, userPassword);
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping("/loadprofileinfo")
+    public Map<String, String> loadprofileinfo(@RequestParam String profileURL) throws SQLException{
+
+        return new loadProfileInfoAPI().loadProfileInfo(profileURL);
     }
 
     @PostMapping("/loadpost")
