@@ -14,41 +14,35 @@ public class loadProfileInfoAPI {
     ConnectToDB connect = new ConnectToDB();
     Connection connection;
     public loadProfileInfoAPI() throws SQLException {
-        Connection connection = connect.getConnection();
+        connection = connect.getConnection();
     }
     public Map<String, String> loadProfileInfo(String profileURL) throws SQLException {
         Map<String, String>JSONResult = new HashMap<String, String>();
-        PreparedStatement prSt = connection.prepareStatement("select p.bio, p.description, p.profileurl, ui.displayname, p.banner_pic_link, p.pfplink from user_credentials uc join user_info ui on ui.uid = uc.uid join user_profile up on uc.uid = up.uid join profile p on p.profileid = up.profileid where p.profileurl = ?");
+        PreparedStatement prSt = connection.prepareStatement("select p.bio, p.description, p.profileurl, ui.displayname, p.banner_pic_link, p.pfplink from flex_schema.user_credentials uc join flex_schema.user_info ui on ui.uid = uc.uid join flex_schema.user_profile up on uc.uid = up.uid join flex_schema.profile p on p.profileid = up.profileid where p.profileurl = ?");
         prSt.setString(1, profileURL);
         ResultSet resultSet = prSt.executeQuery();
         resultSet.next();
 
 
         String bio = resultSet.getString("bio");
-        resultSet.next();
 
         String description = resultSet.getString("description");
-        resultSet.next();
 
         String profileURLdb = resultSet.getString("profileurl");
-        resultSet.next();
 
         String displayname = resultSet.getString("displayname");
-        resultSet.next();
 
         String bannerPicLink = resultSet.getString("banner_pic_link");
-        resultSet.next();
 
         String pfplink = resultSet.getString("pfplink");
-        resultSet.next();
 
 
         JSONResult.put("displayname", displayname);
-        JSONResult.put("@ (url_prof)", profileURL);
+        JSONResult.put("url_prof", profileURL);
         JSONResult.put("micro_bio", bio);
         JSONResult.put("about_info", description);
-        JSONResult.put("bannerPicLink", bannerPicLink);
-        JSONResult.put("pfplink", pfplink);
+        JSONResult.put("img_banner", bannerPicLink);
+        JSONResult.put("img_avatar", pfplink);
 
 
         return JSONResult;
