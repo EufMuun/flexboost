@@ -75,34 +75,34 @@ export const NewNavBar = () => {
 
                 {!withUseAuth ? (
                     <NavbarContent justify="end">
-                            <Button variant="flat" onClick={ToAuth} className={"to-signup-header"}>
-                                Login
-                            </Button>
-                            <Button variant="flat" onClick={ToSignUo} className={"to-signup-header"}>
-                                Sign up
-                            </Button>
+                        <Button variant="flat" onClick={ToAuth} className={"to-signup-header"}>
+                            Login
+                        </Button>
+                        <Button variant="flat" onClick={ToSignUo} className={"to-signup-header"}>
+                            Sign up
+                        </Button>
                     </NavbarContent>
-                    ) : (
-                            <NavbarContent as="div" className="items-center" justify="end">
-                                <Dropdown placement="bottom-end">
-                                    <DropdownTrigger>
-                                        <Avatar className="avatar"
-                                            size="lg"
-                                            as="button"
-                                            src={pfp}
-                                        />
-                                    </DropdownTrigger>
-                                    <DropdownMenu>
-                                        <DropdownItem key="profile">
-                                            <Link className="to-profile-header" onClick={ToProfile}>{user.email}</Link>
-                                        </DropdownItem>
-                                        <DropdownItem key="settings">My Settings</DropdownItem>
-                                        <DropdownItem key="logout" color="danger" className="text-danger" onClick={logoutAction}>
-                                            Выйти
-                                        </DropdownItem>
-                                    </DropdownMenu>
-                                </Dropdown>
-                            </NavbarContent>
+                ) : (
+                    <NavbarContent as="div" className="items-center" justify="end">
+                        <Dropdown placement="bottom-end">
+                            <DropdownTrigger>
+                                <Avatar className="avatar"
+                                        size="lg"
+                                        as="button"
+                                        src={user.img_avatar}
+                                />
+                            </DropdownTrigger>
+                            <DropdownMenu>
+                                <DropdownItem key="profile">
+                                    <Link className="to-profile-header" onClick={ToProfile}>{user.email}</Link>
+                                </DropdownItem>
+                                <DropdownItem key="settings">My Settings</DropdownItem>
+                                <DropdownItem key="logout" color="danger" className="text-danger" onClick={logoutAction}>
+                                    Выйти
+                                </DropdownItem>
+                            </DropdownMenu>
+                        </Dropdown>
+                    </NavbarContent>
                 )}
             </Navbar>
         </div>

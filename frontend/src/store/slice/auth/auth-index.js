@@ -1,14 +1,15 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
-    /*user: {},*/
-    user: {
+    user: {},
+/*    user: {
         email: "lololo@gmail.com",
         author: true,
         id: "1",
+        img_avatar: "https://i.ibb.co/bNHnqVv/avatar-head.png",
 
-    },
-    isLogged: true
+    },*/
+    isLogged: false
 }
 
 export const authSlice = createSlice({
@@ -19,9 +20,9 @@ export const authSlice = createSlice({
         login(state, action) {
             state.user = action.payload
             state.isLogged = true
-/*            console.log('Action', action.payload)
-            console.log('User from state', state.user)
-            console.log('Login', state.isLogged)*/
+            /*            console.log('Action', action.payload)
+                        console.log('User from state', state.user)
+                        console.log('Login', state.isLogged)*/
         },
         logout(state) {
             state.user = {};
