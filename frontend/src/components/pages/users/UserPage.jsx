@@ -170,7 +170,6 @@ export const UserPage = () => {
                                     <img src={userData.img_avatar} alt={"avatar"} className={"post-mini-avatar post-mini-avatar"}/>
                                 </div>
                                 <div className={"post-share-buy"}>
-                                    <img src={share_icon} alt={"share"}/>
                                     <Button className={"interactive-buttons"}>Купить</Button>
                                 </div>
                             </div>
@@ -190,11 +189,9 @@ export const UserPage = () => {
                                 </div>
                                 <div className={"post-likes-comments"}>
                                     <div className={"post-likes-container"}>
-                                        <img src={like_icon} alt={"like"}/>
                                         <span className={"fs24-fw400"}>999999</span>
                                     </div>
                                     <div className={"post-likes-container"}>
-                                        <img src={comments_icon} alt={"comment"}/>
                                         <span className={"fs24-fw400"}>999999</span>
                                     </div>
                                 </div>
