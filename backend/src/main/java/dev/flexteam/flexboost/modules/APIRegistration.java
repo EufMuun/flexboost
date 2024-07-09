@@ -59,11 +59,21 @@ public class APIRegistration {
                 insertUserProfileStmt.setInt(2, profileId);
                 insertUserProfileStmt.executeUpdate();
 
+                PreparedStatement prSt2 = connection.prepareStatement("p.pfplink from user_credentials uc join user_info ui on ui.uid = uc.uid join user_profile up on uc.uid = up.uid join profile p on p.profileid = up.profileid where p.profileurl = ?");
+                prSt2.setString(1, String.valueOf(profileId));
+                ResultSet resultSet = prSt2.executeQuery();
+                String ava = null;
+                if(resultSet.next()){
+                    ava = resultSet.getString("pfplink");
+                }
+
                 // Подтверждение транзакции
                 connection.commit();
-                JSONResult.put("id", String.valueOf(profileId));
+                //JSONResult.put("id", String.valueOf(profileId));
+                JSONResult.put("id", email);
                 JSONResult.put("email", email);
                 JSONResult.put("author", "true");
+                JSONResult.put("img_avatar", ava);
                 JSONResult.put("result", "true");
 
             } catch (SQLException e) {

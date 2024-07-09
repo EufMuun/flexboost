@@ -40,7 +40,8 @@ public class APILogin {
 
             if(Objects.equals(passwordFromDB, password)){
                 //если пароль верный
-                JSONResult.put("id", String.valueOf(userID));
+                //JSONResult.put("id", String.valueOf(userID));
+                JSONResult.put("id", email);
                 JSONResult.put("email", email);
                 JSONResult.put("author", "true");
                 JSONResult.put("result", "true");
