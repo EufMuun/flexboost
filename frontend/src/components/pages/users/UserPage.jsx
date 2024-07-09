@@ -155,21 +155,48 @@ export const UserPage = () => {
                     <div className={"post-frame"}>
                         <div className={"post-banner-info-user"}>
                             <div className={"post-banner"}>
-                                <span>header</span>
+                                <img src={"https://i.ibb.co/pz8vvyw/Post-banner.png"} alt={"img"} className={"post-img-banner"}/>
+                                {/*<img src={"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/ba/29/5c/img-worlds-of-adventure.jpg?w=1200&h=1200&s=1"} alt={"img"} className={"post-img-banner"}/>*/}
+                                <span className={"post-span-header fs32-fw400"}>Art Reel 2024, comparing my old works to new ones!!!
+                                    asdasdsd ^3 ^3</span>
                             </div>
                             <div className={"post-banner-about"}>
-                                <span>@hello</span>
+                                <div className={"post-account-avatar"}>
+                                    <div className={"post-data-link"}>
+                                        <span className={"fs22-fw400"}>02.07.24 | 12:56</span>
+                                        <span className={"fs20-fw400"}>@{userData.url_prof}</span>
+                                        {/*<span className={"fs20-fw400"}>@sadasdasdasdasdasdasdasdsadasda asdasdsad asdsadasd</span>*/}
+                                    </div>
+                                    <img src={userData.img_avatar} alt={"avatar"} className={"post-mini-avatar post-mini-avatar"}/>
+                                </div>
+                                <div className={"post-share-buy"}>
+                                    <img src={share_icon} alt={"share"}/>
+                                    <Button className={"interactive-buttons"}>Купить</Button>
+                                </div>
                             </div>
                         </div>
 
                         <div className={"post-media-info"}>
                             <div className={"post-media-preview"}>
-                                <span>img</span>
+                                <img src={"https://i.ibb.co/QJhh9XC/Frame-8.png"} alt={"img"} className={"post-media-content"}/>
                             </div>
                             <div className={"post-info-with-likes"}>
-                                <span className={"post-span-info"}>info info info</span>
+                                <div className={"post-span-info"}>
+                                    <span className={"post-overflow-span fs24-fw400"}>Lorem ipsum Lorem ip
+                                                                    Lorem ipsum Lorem ip
+                                                                    Lorem ipsum Lorem ip
+                                                                    Lorem ipsum Lorem ip
+                                                                    Lorem ipsum Lorem ip Lorem ipsum Lorem Lorem ipsum</span>
+                                </div>
                                 <div className={"post-likes-comments"}>
-                                    likes <br/> comments
+                                    <div className={"post-likes-container"}>
+                                        <img src={like_icon} alt={"like"}/>
+                                        <span className={"fs24-fw400"}>999999</span>
+                                    </div>
+                                    <div className={"post-likes-container"}>
+                                        <img src={comments_icon} alt={"comment"}/>
+                                        <span className={"fs24-fw400"}>999999</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
