@@ -41,7 +41,7 @@ export const UserPage = () => {
     useEffect(() => {
         const getUserInfo = async () => {
             try {
-                const response = await api.get(`loadprofileinfo/profileURL=${id}`)
+                const response = await api.get(`loadprofileinfo?profileURL=${id}`)
                 setUserData(response.data)
                 console.log(userData)
             } catch (e) {
